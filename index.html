@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoinTap</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪙</text></svg>">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .pc-warning {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+      z-index: 9999;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      text-align: center;
+      padding: 50px 20px;
+    }
+    .pc-warning.show {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .pc-warning h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #ffe259, #ffb347, #ff6a00, #ffe259);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+    }
+    .pc-warning p {
+      font-size: 1.2rem;
+      color: #ffe259;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+    .pc-warning .icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- PC uchun ogohlantirish -->
+  <div class="pc-warning" id="pc-warning">
+    <div class="icon">🖥️</div>
+    <h1>PC Ekran</h1>
+    <p>Bu ekran bizni web saytimizga to'g'ri kelmaydi. Iltimos, mobil qurilmadan foydalaning!</p>
+  </div>
+
+  <div class="app">
+    <!-- Background elements -->
+    <div class="background">
+      <div class="bg-element bg-element-1"></div>
+      <div class="bg-element bg-element-2"></div>
+      <div class="bg-element bg-element-3"></div>
+      <div class="bg-element bg-element-4"></div>
+    </div>
+
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <h1 class="title">CoinTap</h1>
+        <p class="subtitle"><a href="https://example.com" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;">CoinTap haqida</a></p>
+      </header>
+
+      <!-- Energy Bar -->
+      <div class="energy-label">
+        <div class="energy-bar-bg">
+          <div class="energy-bar" id="energy-bar"></div>
+        </div>
+        <span class="energy-text"><span id="energy-display">2000</span> / 2000</span>
+      </div>
+      <!-- Coins Counter -->
+      <div class="coin-center-value">
+        <span class="coin-center-label">Tangalar</span>
+        <span class="coin-center-amount" id="coins-display">0</span>
+      </div>
+
+      <!-- Main Coin -->
+      <div class="coin-container">
+        <button class="coin-button" id="coin-button">
+          <div class="coin-inner">
+            <div class="coin-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="8" cy="8" r="7"></circle>
+                <circle cx="16" cy="16" r="7"></circle>
+                <path d="M8 2v14"></path>
+                <path d="M16 8v14"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="coin-shine"></div>
+          <div class="tap-indicator" id="tap-indicator">Meni bosing!</div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Bottom Menu -->
+  <nav class="bottom-menu">
+    <a href="#" class="menu-item active home">
+      <span class="menu-icon">
+        <svg class="home-icon" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M9 21V9h6v12"/></svg>
+      </span>
+      <span class="menu-label" style="color:#111;">Bosh sahifa</span>
+    </a>
+    <a href="shop.html" class="menu-item">
+      <span class="menu-icon">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 16v-1a4 4 0 0 0-8 0v1"/><line x1="8" y1="16" x2="16" y2="16"/></svg>
+      </span>
+      <span class="menu-label" style="color:#111;">Do'kon</span>
+    </a>
+    <a href="profil.html" class="menu-item" id="profile-menu-link">
+      <span class="menu-icon">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a8.38 8.38 0 0 1 13 0"/></svg>
+      </span>
+      <span class="menu-label" style="color:#111;">Profil</span>
+    </a>
+  </nav>
+
+  <script src="script.js"></script>
+  <script>
+    // PC qurilma tekshirish
+    function checkDevice() {
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      const screenWidth = window.innerWidth;
+      
+      // Agar mobil qurilma bo'lmasa yoki ekran kengligi 768px dan katta bo'lsa
+      if (!isMobile || screenWidth > 768) {
+        document.getElementById('pc-warning').classList.add('show');
+        document.body.style.overflow = 'hidden'; // Scroll ni o'chirish
+      }
+    }
+    
+    // Sahifa yuklanganda tekshirish
+    document.addEventListener('DOMContentLoaded', checkDevice);
+    
+    // Ekran o'lchami o'zgarganda ham tekshirish
+    window.addEventListener('resize', checkDevice);
+  </script>
+</body>
+</html>
